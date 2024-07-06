@@ -1,13 +1,31 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + Vue</title>
+    <title>Cours Vue js</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <div id="app">
+      Bonjour à tous, bienvenue dans la formation donnée par
+      <u>{{ societe }}</u>
+      <div v-if="nbClients> 0">
+        Nous avons {{ getNbClients() }}
+      </div>
+      <span v-else>, nous sommes désolé</span>
+      <div class="actions">
+        <button v-on:click="enter()">Entrer</button>
+        <button @click="leave">Sortir</button>
+        <button @click.once="displayBox('Bonjour !')">Une fois</button>
+      </div>
+      <input
+        v-model="nom"
+        placeholder="Nom du restaurant"
+        name="restaurant_name"
+      />
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="./App.js"></script>
   </body>
 </html>
