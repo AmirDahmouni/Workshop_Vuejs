@@ -98,6 +98,7 @@
 
 <script>
 import ItemComponent from '../components/ItemComponent.vue'
+import { watch } from 'vue'
 
 export default {
   name: 'TableMovies',
@@ -126,6 +127,14 @@ export default {
         description: '',
       },
     }
+  },
+  watch: {
+    items: {
+      handler(old, newList) {
+        alert('Movie list updated with success', newList)
+      },
+      deep: true,
+    },
   },
   methods: {
     editItem(item) {

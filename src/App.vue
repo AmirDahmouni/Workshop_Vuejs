@@ -1,16 +1,18 @@
 <template>
   <div id="app">
-    <TableMovies />
+    <ListMovies />
   </div>
 </template>
 
 <script>
 import TableMovies from './pages/TableMovies.vue'
+import ListMovies from './pages/ListMovies.vue'
 
 export default {
   name: 'App',
   components: {
     TableMovies,
+    ListMovies,
   },
 }
 </script>
