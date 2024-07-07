@@ -1,7 +1,7 @@
 <template>
   <div class="container mt-5">
     <h2 class="mb-4">
-      Bonjour à tous, bienvenue dans la formation donnée par
+      Bonjour {{ user }}, bienvenue dans la formation donnée par
       <u>{{ societe }}</u>
     </h2>
 
@@ -37,6 +37,13 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+
+const props = defineProps({
+  user: {
+    type: String,
+    required: true,
+  },
+})
 
 const societe = ref('ESN Consulting')
 const nbClients = ref(234)

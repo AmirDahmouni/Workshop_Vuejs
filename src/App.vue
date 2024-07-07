@@ -1,20 +1,15 @@
 <template>
   <div id="app">
-    <NavbarComponent />
     <router-view></router-view>
   </div>
 </template>
 
 <script>
 import NavbarComponent from './components/NavbarComponent.vue'
-import TableMovies from './pages/TableMovies.vue'
-import ListMovies from './pages/ListMovies.vue'
 
 export default {
   name: 'App',
   components: {
-    TableMovies,
-    ListMovies,
     NavbarComponent,
   },
 }

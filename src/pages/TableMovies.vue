@@ -1,6 +1,7 @@
 <template>
-  <div class="container mt-5">
-    <HeaderComponent />
+  <NavbarComponent />
+  <div class="container">
+    <HeaderComponent :user="email" />
     <h2 class="mb-4">Les films de moment</h2>
     <table class="table table-bordered">
       <thead class="thead-dark">
@@ -58,6 +59,7 @@
 </template>
 
 <script>
+import NavbarComponent from '../components/NavbarComponent.vue'
 import ItemComponent from '../components/ItemComponent.vue'
 import HeaderComponent from '../components/HeaderComponent.vue'
 import { watch } from 'vue'
@@ -66,6 +68,7 @@ export default {
   name: 'TableMovies',
   components: {
     HeaderComponent,
+    NavbarComponent,
     ItemComponent,
   },
   data() {
@@ -126,8 +129,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.container {
-  margin-top: 20px;
-}
-</style>
+<style></style>
