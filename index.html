@@ -11,8 +11,22 @@
     <title>Cours Vue js</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <mgg-menu v-bind:menu-today="menu"></mgg-menu>
+    </div>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     <script type="module" src="/src/main.js"></script>
+    <script type="text/template" id="template-mgg-menu">
+      <div>
+      Bonjour, veuillez trouver le menu du jour ci-dessous :
+      <button @click="clear()">Tout vider</button>
+      <ul>
+      <li v-for="(food, index) of menuToday" :key="index">
+      {{ food}}
+      </li>
+      </ul>
+      <hr/>
+      </div>
+    </script>
   </body>
 </html>

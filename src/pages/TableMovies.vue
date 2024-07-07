@@ -11,21 +11,36 @@
     <p class="text-start" v-else>nous sommes désolé</p>
 
     <div class="actions">
-      <button v-on:click="enter()">Entrer</button>
-      <button @click="leave">Sortir</button>
-      <button @click.once="displayBox('Bonjour !')">Une fois</button>
+      <button class="btn btn-success btn-sm mr-2" @click="leave">
+        -
+      </button>
+      <button class="btn btn-success btn-sm mr-2" @click="enter()">
+        +
+      </button>
+      <button
+        class="btn btn-danger btn-sm mr-2"
+        @click.once="displayBox('Bonjour !')"
+      >
+        Une fois
+      </button>
     </div>
-    <input
-      v-model="nom"
-      placeholder="Nom du restaurant"
-      name="restaurant_name"
-    />
+    <div class="input-group mb-3">
+      <span class="input-group-text" id="basic-addon1">Remark</span>
+      <input
+        v-model="nom"
+        placeholder="Nom du restaurant"
+        class="form-control"
+        name="restaurant_name"
+        aria-label="Username"
+        aria-describedby="basic-addon1"
+      />
+    </div>
     <ul>
       <li v-for="(food, index) of Projects" :key="index">
-        {{ index }} -{{ food }}
+        {{ food }}
       </li>
     </ul>
-    <h2 class="mb-4">Vue.js Table with Bootstrap</h2>
+    <h2 class="mb-4">Les films de moment</h2>
     <table class="table table-bordered">
       <thead class="thead-dark">
         <tr>
@@ -37,50 +52,18 @@
       </thead>
       <tbody>
         <tr v-for="(item, index) in items" :key="item.id">
-          <td>{{ item.id }}</td>
-          <td>
-            <span v-if="!item.editing">{{ item.title }}</span>
-            <input
-              v-else
-              type="text"
-              v-model="item.title"
-              class="form-control"
-            />
-          </td>
-          <td>
-            <span v-if="!item.editing">{{ item.description }}</span>
-            <input
-              v-else
-              type="text"
-              v-model="item.description"
-              class="form-control"
-            />
-          </td>
-          <td>
-            <button
-              v-if="!item.editing"
-              class="btn btn-primary btn-sm mr-2"
-              @click="editItem(item)"
-            >
-              Edit
-            </button>
-            <button
-              v-else
-              class="btn btn-success btn-sm mr-2"
-              @click="saveItem(item)"
-            >
-              Save
-            </button>
-            <button class="btn btn-danger btn-sm" @click="deleteItem(item)">
-              Delete
-            </button>
-          </td>
+          <ItemComponent
+            :item="item"
+            @edit-item="editItem"
+            @removeItem="deleteItem"
+            @saveItem="saveItem"
+          />
         </tr>
       </tbody>
     </table>
     <div class="mt-4">
-      {{ nb }}
-      <p>Total number of films: {{ items.length }}</p>
+      <p v-if="items.length === 0">No films found</p>
+      <p v-else>Total number of films: {{ items.length }}</p>
       <button
         class="btn btn-primary"
         @click="showNewItemForm = !showNewItemForm"
@@ -114,11 +97,17 @@
 </template>
 
 <script>
+import ItemComponent from '../components/ItemComponent.vue'
+
 export default {
+  name: 'TableMovies',
+  components: {
+    ItemComponent,
+  },
   data() {
     return {
       societe: 'ESN Consulting',
-      nom: 'We involve',
+      nom: 'We involve Here',
       nbClients: 234,
       Projects: [
         'Développement et maintenance',
