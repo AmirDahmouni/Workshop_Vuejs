@@ -1,37 +1,6 @@
 <template>
   <div class="container mt-5">
-    <h2 class="mb-4">
-      Bonjour à tous, bienvenue dans la formation donnée par
-      <u>{{ societe }}</u>
-    </h2>
-
-    <p class="text-start" v-if="nbClients > 0">
-      Nous avons + {{ getNbClients() }}
-    </p>
-    <p class="text-start" v-else>nous sommes désolé</p>
-
-    <div class="actions">
-      <button class="btn btn-success btn-sm mr-2" @click="leave">
-        -
-      </button>
-      <button class="btn btn-success btn-sm mr-2" @click="enter">
-        +
-      </button>
-      <button
-        class="btn btn-danger btn-sm mr-2"
-        @click.once="displayBox('Bonjour !')"
-      >
-        Une fois
-      </button>
-    </div>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1">Remark</span>
-    </div>
-    <ul>
-      <li v-for="(food, index) of Projects" :key="index">
-        {{ food }}
-      </li>
-    </ul>
+    <HeaderComponent />
     <h2 class="mb-4">Les films de moment</h2>
     <table class="table table-bordered">
       <thead class="thead-dark">
@@ -91,14 +60,8 @@
 <script setup>
 import { ref, reactive, watch } from 'vue'
 import MovieComponent from '../components/MovieComponent.vue'
+import HeaderComponent from '../components/HeaderComponent.vue'
 
-const societe = ref('ESN Consulting')
-const nbClients = ref(234)
-const Projects = [
-  'Développement et maintenance',
-  'Infrastructure et Devops',
-  'It & data center',
-]
 const nextId = ref(4)
 const items = ref([
   { id: 1, title: 'Item 1', description: 'Description for Item 1' },
@@ -118,14 +81,8 @@ const saveItem = (item) => {
 }
 
 const deleteItem = (item) => {
-  console.log('====================================')
-  console.log(item)
-  console.log('====================================')
   if (confirm(`Are you sure you want to delete item with ID: ${item.id}?`)) {
     items.value = items.value.filter((i) => i.id !== item.id)
-    console.log('====================================')
-    console.log(items.value)
-    console.log('====================================')
   }
   nextId.value--
 }
@@ -144,29 +101,6 @@ const saveNewItem = () => {
   } else {
     alert('Please fill out both the title and description.')
   }
-}
-
-const getNbClients = () => {
-  if (nbClients.value === 0) {
-    return 'aucun client'
-  } else if (nbClients.value === 1) {
-    return `${nbClients.value} client`
-  } else {
-    return `${nbClients.value} clients`
-  }
-}
-
-const enter = () => {
-  nbClients.value++
-}
-
-const leave = () => {
-  if (nbClients.value <= 0) return
-  nbClients.value--
-}
-
-const displayBox = (msg) => {
-  console.log(msg)
 }
 
 watch(

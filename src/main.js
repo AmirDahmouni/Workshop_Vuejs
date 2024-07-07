@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import router from "./routes"
 
-
-const APP = createApp(App);
+const APP = createApp(App).use(router);
 
 APP.component("mgg-menu", {
   template: "#template-mgg-menu",

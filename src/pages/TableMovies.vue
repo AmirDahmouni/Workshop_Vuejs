@@ -1,45 +1,6 @@
 <template>
   <div class="container mt-5">
-    <h2 class="mb-4">
-      Bonjour à tous, bienvenue dans la formation donnée par
-      <u>{{ societe }}</u>
-    </h2>
-
-    <p class="text-start" v-if="nbClients > 0">
-      Nous avons + {{ getNbClients() }}
-    </p>
-    <p class="text-start" v-else>nous sommes désolé</p>
-
-    <div class="actions">
-      <button class="btn btn-success btn-sm mr-2" @click="leave">
-        -
-      </button>
-      <button class="btn btn-success btn-sm mr-2" @click="enter()">
-        +
-      </button>
-      <button
-        class="btn btn-danger btn-sm mr-2"
-        @click.once="displayBox('Bonjour !')"
-      >
-        Une fois
-      </button>
-    </div>
-    <div class="input-group mb-3">
-      <span class="input-group-text" id="basic-addon1">Remark</span>
-      <input
-        v-model="nom"
-        placeholder="Nom du restaurant"
-        class="form-control"
-        name="restaurant_name"
-        aria-label="Username"
-        aria-describedby="basic-addon1"
-      />
-    </div>
-    <ul>
-      <li v-for="(food, index) of Projects" :key="index">
-        {{ food }}
-      </li>
-    </ul>
+    <HeaderComponent />
     <h2 class="mb-4">Les films de moment</h2>
     <table class="table table-bordered">
       <thead class="thead-dark">
@@ -98,6 +59,7 @@
 
 <script>
 import ItemComponent from '../components/ItemComponent.vue'
+import HeaderComponent from '../components/HeaderComponent.vue'
 import { watch } from 'vue'
 
 export default {
@@ -107,14 +69,6 @@ export default {
   },
   data() {
     return {
-      societe: 'ESN Consulting',
-      nom: 'We involve Here',
-      nbClients: 234,
-      Projects: [
-        'Développement et maintenance',
-        'Infrastructure et Devops',
-        'It & data center',
-      ],
       items: [
         { id: 1, title: 'Item 1', description: 'Description for Item 1' },
         { id: 2, title: 'Item 2', description: 'Description for Item 2' },
@@ -166,25 +120,6 @@ export default {
       } else {
         alert('Please fill out both the title and description.')
       }
-    },
-    getNbClients() {
-      if (this.nbClients === 0) {
-        return `aucun client`
-      } else if (this.nbClients === 1) {
-        return `${this.nbClients} client`
-      } else {
-        return `${this.nbClients} clients`
-      }
-    },
-    enter() {
-      this.nbClients++
-    },
-    leave() {
-      if (this.nbClients <= 0) return
-      this.nbClients--
-    },
-    displayBox(msg) {
-      console.log(msg)
     },
   },
 }
