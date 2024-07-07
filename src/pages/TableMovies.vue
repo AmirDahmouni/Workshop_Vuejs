@@ -65,6 +65,7 @@ import { watch } from 'vue'
 export default {
   name: 'TableMovies',
   components: {
+    HeaderComponent,
     ItemComponent,
   },
   data() {

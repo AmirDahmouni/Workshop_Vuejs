@@ -1,10 +1,12 @@
 <template>
   <div id="app">
-    <ListMovies />
+    <NavbarComponent />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
+import NavbarComponent from './components/NavbarComponent.vue'
 import TableMovies from './pages/TableMovies.vue'
 import ListMovies from './pages/ListMovies.vue'
 
@@ -13,6 +15,7 @@ export default {
   components: {
     TableMovies,
     ListMovies,
+    NavbarComponent,
   },
 }
 </script>
@@ -26,6 +29,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>

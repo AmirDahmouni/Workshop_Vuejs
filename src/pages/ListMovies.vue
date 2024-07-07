@@ -1,4 +1,5 @@
 <template>
+  <NavbarComponent />
   <div class="container mt-5">
     <HeaderComponent />
     <h2 class="mb-4">Les films de moment</h2>
