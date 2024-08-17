@@ -36,7 +36,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import {  ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 const email = ref('')
@@ -45,7 +45,7 @@ const router = useRouter()
 
 const login = () => {
   if (email.value && password.value)
-    router.push({ name: 'ListMovies', query: { email: email.value } })
+    router.push({ name: 'movies', query: { email: email.value } })
   else alert('Please fill in all fields.')
 }
 </script>

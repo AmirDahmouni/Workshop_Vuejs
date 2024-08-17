@@ -70,6 +70,17 @@ export default {
     NavbarComponent,
     ItemComponent,
   },
+  beforeRouteEnter(to, from, next) {
+    // Appelé juste avant que la route ne soit confirmé (next)
+    // N'a évidemment pas accès au "this" du composant appelé car pas encore créé à ce moment
+  },
+  beforeRouteUpdate(to, from, next) {
+    // Appelé quand la route qui a appelé le composant actuel change
+  },
+  beforeRouteLeave(to, from, next) {
+    // Appelé JUSTE avant de quitter la route actuelle
+    // Nous avons encore accès à this
+  },
   data() {
     return {
       items: [

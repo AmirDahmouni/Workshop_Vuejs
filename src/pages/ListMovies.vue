@@ -58,7 +58,7 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import NavbarComponent from '../components/NavbarComponent.vue'

@@ -13,8 +13,8 @@ import NavbarComponent from '../components/NavbarComponent.vue'
 import HeaderComponent from '../components/HeaderComponent.vue'
 
 const router = useRoute()
-const kindContact = ''
-const path = ''
+const kindContact = router.params.support
+const path = router.path
 const email = 'dahmouni.amir@gmail.com'
 
 watch(

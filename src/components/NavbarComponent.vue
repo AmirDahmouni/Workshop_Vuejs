@@ -20,14 +20,14 @@
           </a>
           <a class="nav-link">
             <router-link
-              :to="{ name: 'TableMovies', params: { name: 'table' } }"
+              :to="{ name: 'movies.TableMovies', params: { name: 'table' } }"
             >
               Table movies
             </router-link>
           </a>
           <a class="nav-link">
             <router-link
-              :to="{ name: 'ContactPage', params: { support: 'support' } }"
+              :to="{ name: 'ContactPage', params: { support: 'WeSupport' } }"
             >
               Contact
             </router-link>
