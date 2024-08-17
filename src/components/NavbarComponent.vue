@@ -19,7 +19,18 @@
             <router-link to="/list">List movies</router-link>
           </a>
           <a class="nav-link">
-            <router-link to="/table">Table movies</router-link>
+            <router-link
+              :to="{ name: 'TableMovies', params: { name: 'table' } }"
+            >
+              Table movies
+            </router-link>
+          </a>
+          <a class="nav-link">
+            <router-link
+              :to="{ name: 'ContactPage', params: { support: 'support' } }"
+            >
+              Contact
+            </router-link>
           </a>
         </div>
       </div>
@@ -27,37 +38,4 @@
   </nav>
 </template>
 
-<script setup>
-import { ref, watch } from 'vue'
-
-const societe = ref('ESN Consulting')
-const nbClients = ref(234)
-const Projects = [
-  'Développement et maintenance',
-  'Infrastructure et Devops',
-  'It & data center',
-]
-
-const getNbClients = () => {
-  if (nbClients.value === 0) {
-    return 'aucun client'
-  } else if (nbClients.value === 1) {
-    return `${nbClients.value} client`
-  } else {
-    return `${nbClients.value} clients`
-  }
-}
-
-const enter = () => {
-  nbClients.value++
-}
-
-const leave = () => {
-  if (nbClients.value <= 0) return
-  nbClients.value--
-}
-
-const displayBox = (msg) => {
-  console.log(msg)
-}
-</script>
+<script setup></script>

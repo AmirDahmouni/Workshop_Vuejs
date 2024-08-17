@@ -1,11 +1,10 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from "./routes"
+import router from './routes'
 
 const APP = createApp(App).use(router);
 
-APP.component("mgg-menu", {
-  template: "#template-mgg-menu",
+APP.component('mgg-menu', {
   props: {
     menuToday: {
       type: Array,
@@ -13,14 +12,23 @@ APP.component("mgg-menu", {
     },
     length: Number,
   },
+  emits: ['clear'],
   methods: {
+    emitClear() {
+      this.$emit('clear', "All");
+    },
     getBestMenu() {
       return this.menuToday[0]
-    },
-    clear() {
-      this.menuToday = [];
     }
   },
-})
+  template: `#template-mgg-menu`,
+});
 
-APP.mount('#app')
+APP.component('mgg-panel', {
+  data() {
+    return {};
+  },
+  template: `#template-mgg-panel`,
+});
+
+APP.mount('#app');

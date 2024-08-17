@@ -1,7 +1,7 @@
 <template>
   <NavbarComponent />
   <div class="container mt-5">
-    <HeaderComponent :user="email" />
+    <HeaderComponent :user="email" :path="path" />
     <h2 class="mb-4">Les films de moment</h2>
     <table class="table table-bordered">
       <thead class="thead-dark">
@@ -59,16 +59,19 @@
 </template>
 
 <script setup>
-import { ref, reactive, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import NavbarComponent from '../components/NavbarComponent.vue'
 import MovieComponent from '../components/MovieComponent.vue'
 import HeaderComponent from '../components/HeaderComponent.vue'
 
-const route = useRoute()
+const router = useRoute()
 
-const email = ref(route.query.email)
+const email = router.query.email
+  ? ref(router.query.email)
+  : ref('dahmouni.amir@gmail.com')
 const nextId = ref(4)
+const path = '/ListMovies'
 
 const items = ref([
   { id: 1, title: 'Item 1', description: 'Description for Item 1' },

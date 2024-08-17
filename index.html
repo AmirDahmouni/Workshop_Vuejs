@@ -12,21 +12,40 @@
   </head>
   <body>
     <div id="app">
-      <mgg-menu v-bind:menu-today="menu"></mgg-menu>
+      <mgg-menu
+        v-bind:menu-today="menu"
+        v-bind:length="menu.length"
+        @clear="onClear"
+      >
+        <p>Ce texte doit être affiché chez l'enfant !</p>
+      </mgg-menu>
+      <mgg-panel>
+        <template v-slot:display-2>
+          Bonjour, ce texte ne s'affichera pas
+        </template>
+        <template v-slot:display>Mais celui-là, si !</template>
+      </mgg-panel>
     </div>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script type="module" src="/src/main.js"></script>
     <script type="text/template" id="template-mgg-menu">
       <div>
-      Bonjour, veuillez trouver le menu du jour ci-dessous :
-      <button @click="clear()">Tout vider</button>
-      <ul>
-      <li v-for="(food, index) of menuToday" :key="index">
-      {{ food}}
-      </li>
-      </ul>
-      <hr/>
+        <p>Bonjour, veuillez trouver le menu du jour ci-dessous</p>
+        <button @click="emitClear()">Tout vider</button>
+        <hr />
+        <ul>
+          <li v-for="(food, index) in menuToday" :key="index">
+            [{{ index }}] - {{ food }}
+          </li>
+        </ul>
+        <p v-if="length">Il y a {{ length }} éléments</p>
+        <hr />
       </div>
     </script>
+    <script type="text/template" id="template-mgg-panel">
+      <div>
+      	Affichage restreint => <slot name="display"></slot>
+      </div>
+    </script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script type="module" src="/src/main.js"></script>
   </body>
 </html>

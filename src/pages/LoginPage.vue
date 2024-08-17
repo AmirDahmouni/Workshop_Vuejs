@@ -44,13 +44,9 @@ const password = ref('')
 const router = useRouter()
 
 const login = () => {
-  if (email.value && password.value) {
-    alert(`Email: ${email.value}\nPassword: ${password.value}`)
-
+  if (email.value && password.value)
     router.push({ name: 'ListMovies', query: { email: email.value } })
-  } else {
-    alert('Please fill in all fields.')
-  }
+  else alert('Please fill in all fields.')
 }
 </script>
 

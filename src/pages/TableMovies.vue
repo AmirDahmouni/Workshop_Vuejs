@@ -1,7 +1,7 @@
 <template>
   <NavbarComponent />
   <div class="container">
-    <HeaderComponent :user="email" />
+    <HeaderComponent :user="email" :path="path" />
     <h2 class="mb-4">Les films de moment</h2>
     <table class="table table-bordered">
       <thead class="thead-dark">
@@ -62,7 +62,6 @@
 import NavbarComponent from '../components/NavbarComponent.vue'
 import ItemComponent from '../components/ItemComponent.vue'
 import HeaderComponent from '../components/HeaderComponent.vue'
-import { watch } from 'vue'
 
 export default {
   name: 'TableMovies',
@@ -84,6 +83,8 @@ export default {
         title: '',
         description: '',
       },
+      path: '/TableMovies',
+      email: 'dahmouni.amir@gmail.com',
     }
   },
   watch: {

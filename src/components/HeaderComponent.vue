@@ -4,6 +4,7 @@
       Bonjour {{ user }}, bienvenue dans la formation donnée par
       <u>{{ societe }}</u>
     </h2>
+    <h2 class="mb-4">Composant utilisé : {{ path }}</h2>
 
     <p class="text-start" v-if="nbClients > 0">
       Nous avons + {{ getNbClients() }}
@@ -36,10 +37,14 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, defineProps } from 'vue'
 
 const props = defineProps({
   user: {
+    type: String,
+    required: true,
+  },
+  path: {
     type: String,
     required: true,
   },

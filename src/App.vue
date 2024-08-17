@@ -1,16 +1,30 @@
 <template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+  <router-view></router-view>
 </template>
 
 <script>
 import NavbarComponent from './components/NavbarComponent.vue'
 
 export default {
+  el: '#app',
   name: 'App',
   components: {
     NavbarComponent,
+  },
+  data() {
+    return {
+      menu: [
+        'Filet de saumon - 15€',
+        'Salade de fruit - 9€',
+        'Salade niçoise - 120€',
+      ],
+    }
+  },
+  methods: {
+    onClear(defaultValue) {
+      console.log(defaultValue)
+      this.menu = []
+    },
   },
 }
 </script>
