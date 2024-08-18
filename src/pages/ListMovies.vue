@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in items" :key="item.id">
+        <tr v-for="(item, index) in movies" :key="item.id">
           <MovieComponent
             :item="item"
             @edit-item="editItem"
@@ -58,22 +58,27 @@
   </div>
 </template>
 
-<script>
-import { ref, watch } from 'vue'
+<script setup>
+import { onBeforeMount, ref, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import NavbarComponent from '../components/NavbarComponent.vue'
 import MovieComponent from '../components/MovieComponent.vue'
 import HeaderComponent from '../components/HeaderComponent.vue'
+import { fetchMovies } from '../services/movieService'
 
 const router = useRoute()
 
 const email = router.query.email
   ? ref(router.query.email)
-  : ref('dahmouni.amir@gmail.com')
+  : 'dahmouni.amir@gmail.com'
 const nextId = ref(4)
 const path = '/ListMovies'
+let movies
+onBeforeMount(async () => {
+  movies = await fetchMovies()
+})
 
-const items = ref([
+let items = ref([
   { id: 1, title: 'Item 1', description: 'Description for Item 1' },
   { id: 2, title: 'Item 2', description: 'Description for Item 2' },
   { id: 3, title: 'Item 3', description: 'Description for Item 3' },
