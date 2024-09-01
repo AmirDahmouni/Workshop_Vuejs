@@ -17,15 +17,15 @@
           <MovieComponent
             :item="item"
             @edit-item="editItem"
-            @removeItem="deleteItem"
-            @saveItem="saveItem"
+            @remove-item="deleteItem"
+            @save-item="saveItem"
           />
         </tr>
       </tbody>
     </table>
     <div class="mt-4">
-      <p v-if="items.length === 0">No films found</p>
-      <p v-else>Total number of films: {{ items.length }}</p>
+      <p v-if="movies.length === 0">No films found</p>
+      <p v-else>Total number of films: {{ movies.length }}</p>
       <button
         class="btn btn-primary"
         @click="showNewItemForm = !showNewItemForm"
@@ -34,33 +34,45 @@
       </button>
       <div v-if="showNewItemForm" class="mt-3">
         <h4>Add New Film</h4>
-        <div class="form-group">
-          <label for="newTitle">Title</label>
-          <input
-            type="text"
-            id="newTitle"
-            v-model="newItem.title"
-            class="form-control"
-          />
-        </div>
-        <div class="form-group">
-          <label for="newDescription">Description</label>
-          <input
-            type="text"
-            id="newDescription"
-            v-model="newItem.description"
-            class="form-control"
-          />
-        </div>
-        <button class="btn btn-success" @click="saveNewItem">Save</button>
+        <Form
+          :validation-schema="schema"
+          @submit="onSubmit"
+          v-slot="{ values, errors, meta }"
+        >
+          <div class="form-group">
+            <label for="newTitle">Title</label>
+            <Field
+              v-model="newItem.title"
+              class="form-control"
+              name="title"
+              type="text"
+            />
+            <ErrorMessage name="title" />
+          </div>
+
+          <div class="form-group">
+            <label for="newDescription">Description</label>
+            <Field
+              v-model="newItem.description"
+              class="form-control"
+              name="description"
+              type="text"
+            />
+            <ErrorMessage name="description" />
+          </div>
+
+          <button class="btn btn-success" @click="saveNewItem">Save</button>
+        </Form>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { onBeforeMount, ref, watch } from 'vue'
+import { onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
+import { Field, Form, ErrorMessage } from 'vee-validate'
+import * as yup from 'yup'
 import NavbarComponent from '../components/NavbarComponent.vue'
 import MovieComponent from '../components/MovieComponent.vue'
 import HeaderComponent from '../components/HeaderComponent.vue'
@@ -68,26 +80,36 @@ import { fetchMovies } from '../services/movieService'
 
 const router = useRoute()
 
-const email = router.query.email
-  ? ref(router.query.email)
-  : 'dahmouni.amir@gmail.com'
-const nextId = ref(4)
-const path = '/ListMovies'
-let movies
-onBeforeMount(async () => {
-  movies = await fetchMovies()
+// Fix schema: title should be string, not email
+const schema = yup.object({
+  title: yup.string().required(),
+  description: yup.string().required(),
 })
 
-let items = ref([
-  { id: 1, title: 'Item 1', description: 'Description for Item 1' },
-  { id: 2, title: 'Item 2', description: 'Description for Item 2' },
-  { id: 3, title: 'Item 3', description: 'Description for Item 3' },
-])
+const onSubmit = (values) => {
+  saveNewItem()
+}
+
+const email = ref(router.query.email || 'dahmouni.amir@gmail.com')
+const nextId = ref(5)
+const path = '/ListMovies'
+
+const movies = ref([])
+
+onMounted(async () => {
+  try {
+    const response = await fetchMovies()
+    movies.value = response
+  } catch (error) {
+    console.error(error)
+  }
+})
+
 const showNewItemForm = ref(false)
 const newItem = ref({ title: '', description: '' })
 
 const editItem = (item) => {
-  items.value.forEach((i) => (i.editing = false))
+  movies.value.forEach((i) => (i.editing = false))
   item.editing = true
 }
 
@@ -97,34 +119,33 @@ const saveItem = (item) => {
 
 const deleteItem = (item) => {
   if (confirm(`Are you sure you want to delete item with ID: ${item.id}?`)) {
-    items.value = items.value.filter((i) => i.id !== item.id)
+    movies.value = movies.value.filter((i) => i.id !== item.id)
   }
   nextId.value--
 }
 
 const saveNewItem = () => {
-  if (newItem.value.title.trim() && newItem.value.description.trim()) {
-    items.value.push({
-      id: nextId.value++,
-      title: newItem.value.title,
-      description: newItem.value.description,
-      editing: false,
+  // Check if both title and description are filled out
+  if (newItem.value.title && newItem.value.description) {
+    // Add the new movie to the movies array
+    movies.value.push({
+      id: nextId.value++, // Generate a new ID for the new movie
+      title: newItem.value.title, // Set the title from the form
+      description: newItem.value.description, // Set the description from the form
+      editing: false, // Set editing to false by default
     })
+
+    // Clear the form fields after saving
     newItem.value.title = ''
     newItem.value.description = ''
+
+    // Hide the form after saving
     showNewItemForm.value = false
   } else {
+    // If the form is incomplete, show an alert
     alert('Please fill out both the title and description.')
   }
 }
-
-watch(
-  items,
-  (newVal, oldVal) => {
-    console.log(`Les valuers de Items : ${oldVal}=> ${newVal}`)
-  },
-  { deep: true },
-)
 </script>
 
 <style scoped>
