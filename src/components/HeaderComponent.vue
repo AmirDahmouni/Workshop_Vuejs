@@ -6,6 +6,16 @@
     </h2>
     <h2 class="mb-4">Composant utilisé : {{ path }}</h2>
 
+    <p class="text-start">Count {{ count }}</p>
+    <p class="text-start">Double Count {{ doubleCount }}</p>
+
+    <button class="btn btn-success btn-sm mr-2" @click="increment">
+      Increment
+    </button>
+    <button class="btn btn-success btn-sm mr-2" @click="randomizeCounter">
+      randomize
+    </button>
+
     <p class="text-start" v-if="nbClients > 0">
       Nous avons + {{ getNbClients() }}
     </p>
@@ -18,6 +28,7 @@
       <button class="btn btn-success btn-sm mr-2" @click="enter">
         +
       </button>
+
       <button
         class="btn btn-danger btn-sm mr-2"
         @click.once="displayBox('Bonjour !')"
@@ -37,6 +48,8 @@
 </template>
 
 <script setup>
+import { useCounterStore } from '../stores/store'
+import { storeToRefs } from 'pinia'
 import { ref, defineProps } from 'vue'
 
 const props = defineProps({
@@ -49,6 +62,10 @@ const props = defineProps({
     required: true,
   },
 })
+
+const counterStore = useCounterStore()
+const { count, doubleCount } = storeToRefs(counterStore)
+const { increment, randomizeCounter } = counterStore
 
 const societe = ref('ESN Consulting')
 const nbClients = ref(234)

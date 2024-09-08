@@ -14,7 +14,7 @@ import HeaderComponent from '../components/HeaderComponent.vue'
 
 const router = useRoute()
 const kindContact = router.params.support
-const path = router.path
+let path = router.path
 const email = 'dahmouni.amir@gmail.com'
 
 watch(
