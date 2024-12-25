@@ -6,6 +6,14 @@ Ce document regroupe les notions importantes abordées lors de la formation Vue.
 
 ## Importer Vue.js
 
+Importer VueJS via CDN ou Local
+Vue.js peut être utilisé de deux façons principales :
+
+**CDN** : Inclure un fichier <script> dans votre fichier HTML en pointant vers un CDN.
+**Local** : Téléchargez Vue.js et incluez-le dans votre projet.
+
+Cela permet de démarrer rapidement ou d’intégrer Vue.js dans un projet existant.
+
 ### Via CDN
 ```html
 <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
@@ -20,6 +28,9 @@ Ce document regroupe les notions importantes abordées lors de la formation Vue.
 
 ## Text Interpolation
 Permet d'afficher des données dans le DOM.
+
+L’interpolation utilise la syntaxe {{ }} pour afficher des données dynamiques dans le DOM. Cela lie des variables du modèle (data) à la vue.
+
 ```html
 <div id="app">
   <p>{{ message }}</p>
@@ -41,11 +52,15 @@ const app = Vue.createApp({
 ## Débugger avec Vue.js Devtools
 Téléchargez [Vue.js Devtools](https://devtools.vuejs.org/) pour Chrome ou Firefox pour visualiser les données et composants.
 
+Vue.js Devtools est une extension pour Chrome permettant de visualiser l’état des composants, des props, des données et des événements déclenchés en temps réel.
+
 ---
 
 ## Liaison du Modèle et de la Vue
+La liaison entre le modèle et la vue est au cœur de Vue.js grâce à la réactivité. Cela permet de mettre à jour l’interface utilisateur automatiquement quand les données changent.
 
 ### Liaison des Propriétés
+v-bind ou : permet de lier dynamiquement des attributs HTML à des données Vue.js.
 ```html
 <div id="app">
   <input v-bind:placeholder="placeholderText">
@@ -63,6 +78,8 @@ const app = Vue.createApp({
 ```
 
 ### Two-way Binding avec `v-model`
+Les méthodes permettent de définir des fonctions pour gérer des événements ou manipuler des données.
+
 ```html
 <div id="app">
   <input v-model="message">
@@ -83,6 +100,7 @@ const app = Vue.createApp({
 ---
 
 ## Événements
+Les événements comme v-on:click ou @click permettent d’écouter les interactions de l’utilisateur et d’exécuter des méthodes correspondantes.
 
 ### Ajouter un Gestionnaire d'Événements
 ```html
