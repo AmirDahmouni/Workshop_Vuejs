@@ -1,15 +1,15 @@
 # Vue.js
-
-Ce document regroupe les notions importantes abordées lors de la formation Vue.js, accompagnées d'exemples de code bien écrits.
+Ce document regroupe les notions importantes abordées de Vue.js, accompagnées d'exemples de code bien écrits.
 
 ---
 
 ## Importer Vue.js
-
 Importer VueJS via CDN ou Local
+
 Vue.js peut être utilisé de deux façons principales :
 
 **CDN** : Inclure un fichier <script> dans votre fichier HTML en pointant vers un CDN.
+
 **Local** : Téléchargez Vue.js et incluez-le dans votre projet.
 
 Cela permet de démarrer rapidement ou d’intégrer Vue.js dans un projet existant.
@@ -56,9 +56,6 @@ Vue.js Devtools est une extension pour Chrome permettant de visualiser l’état
 
 ---
 
-## Liaison du Modèle et de la Vue
-La liaison entre le modèle et la vue est au cœur de Vue.js grâce à la réactivité. Cela permet de mettre à jour l’interface utilisateur automatiquement quand les données changent.
-
 ### Liaison des Propriétés
 v-bind ou : permet de lier dynamiquement des attributs HTML à des données Vue.js.
 ```html
@@ -78,7 +75,7 @@ const app = Vue.createApp({
 ```
 
 ### Two-way Binding avec `v-model`
-Les méthodes permettent de définir des fonctions pour gérer des événements ou manipuler des données.
+La liaison entre le modèle et la vue est au cœur de Vue.js grâce à la réactivité. Cela permet de mettre à jour l’interface utilisateur automatiquement quand les données changent.
 
 ```html
 <div id="app">
@@ -103,6 +100,7 @@ const app = Vue.createApp({
 Les événements comme v-on:click ou @click permettent d’écouter les interactions de l’utilisateur et d’exécuter des méthodes correspondantes.
 
 ### Ajouter un Gestionnaire d'Événements
+
 ```html
 <div id="app">
   <button @click="sayHello">Cliquez-moi</button>
@@ -139,6 +137,10 @@ const app = Vue.createApp({
 ---
 
 ## Directives Structurelles
+
+**v-if** : Rend un élément conditionnel.
+**v-for** : Boucle sur une liste de données.
+**v-show** : Affiche ou cache un élément en manipulant le style display.
 
 ### `v-if` et `v-else`
 ```html
@@ -201,7 +203,7 @@ const app = Vue.createApp({
 ---
 
 ## Composants et Templates
-
+Pour un meilleur découpage, le template HTML peut être séparé du JavaScript.
 ### Définir un Composant avec un Template
 ```html
 <div id="app">
@@ -220,6 +222,8 @@ app.mount('#app');
 ```
 
 ### Passage de Propriétés
+Les props permettent de transmettre des données d’un composant parent à un composant enfant.
+
 ```html
 <div id="app">
   <greeting-message v-bind:message="customMessage"></greeting-message>
@@ -245,9 +249,17 @@ app.mount('#app');
 
 ---
 
+
+# Options API vs Composition API
+
+**Options API** : Utilise des sections comme data, methods, et computed.
+**Composition API** : Basée sur des fonctions, comme ref et reactive, pour une meilleure modularité.
+
+
 ## Propriétés Calculées et Watchers
 
 ### Propriétés Calculées
+Les propriétés calculées exécutent des opérations complexes sur les données et renvoient un résultat automatiquement réactif.
 ```html
 <div id="app">
   <p>{{ reversedMessage }}</p>
@@ -270,6 +282,7 @@ const app = Vue.createApp({
 ```
 
 ### Watchers
+Les watchers surveillent les changements d’une donnée et exécutent une fonction en conséquence.
 ```html
 <div id="app">
   <input v-model="name">
@@ -294,6 +307,7 @@ const app = Vue.createApp({
 ---
 
 ## Router et Navigation
+Vue Router gère la navigation dans une application Vue.
 
 ### Définir des Routes avec Vue Router
 ```html
@@ -327,6 +341,8 @@ app.mount('#app');
 ---
 
 ## Validation des Formulaires avec VeeValidate
+**VeeValidate** : Permet une validation simple et efficace.
+**Yup** : Définit des schémas de validation.
 
 ```html
 <template>
