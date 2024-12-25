@@ -1,4 +1,4 @@
-# Vue.js Formation ReadMe
+# Vue.js
 
 Ce document regroupe les notions importantes abordées lors de la formation Vue.js, accompagnées d'exemples de code bien écrits.
 
